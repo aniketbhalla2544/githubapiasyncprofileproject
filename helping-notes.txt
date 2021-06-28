@@ -1,0 +1,14 @@
+
+# displaying name in show profile btn
+=========================================
+
+{/* 
+                <Link to={`/users/${name}`} className=' max-w-xl overflow-hidden whitespace-nowrap text-center text-base uppercase focus:outline-none focus:ring-4 focus:ring-opacity-50 focus:ring-blue-200 tracking-wider bg-white px-5 py-3 font-bold rounded'>
+                    {
+                        (name !== "")
+                            ? `show ${name}'s profile`
+                            : `show profile`
+                    }
+                </Link> */}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
