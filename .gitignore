@@ -12,7 +12,7 @@ node_modules
 /build
 
 # misc
-helping-notes
+helping-notes.txt
 .DS_Store
 .env.local
 .env.development.local
