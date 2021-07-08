@@ -11,10 +11,12 @@ const App = () => {
 
       <Switch>
 
+        {/* routing to UserNameInput */}
         <Route exact path="/">
           <UsernameInput />
         </Route>
 
+        {/* routing to ShowProfile */}
         <Route path="/users/:paramsUsername">
           <ShowProfile />
         </Route>

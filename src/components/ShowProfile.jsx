@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const ShowProfile = () => {
 
-    const { paramsUsername } = useParams();
+    const { paramsUsername } = useParams(); // getting username through URL params 
     const history = useHistory();
-    const navigationlocation = useLocation();
 
-    const [userData, setUserData] = useState({
+    const [userData, setUserData] = useState({  // state var to collect & update user data
         userName: paramsUsername,
         avatarUrl: "",
         userLocation: "",
@@ -20,21 +19,26 @@ const ShowProfile = () => {
         userRepos: [],
     });
 
+    // whenever component mounts
     useEffect(() => {
 
+        // IIFE
         (async () => {
 
             try {
 
+                // requesting GitHub API for data
                 const response = await axios.get(`https://api.github.com/users/${userData.userName}`);
 
                 let { data: { avatar_url, location, bio, public_repos, hireable, repos_url } } = response;
 
                 if (hireable === null) hireable = "No";
 
+                // requesting GitHub API for user repositories
                 const reposRespone = await axios.get(`${repos_url}`);
                 const { data: reposData } = reposRespone;
 
+                // updating state var
                 setUserData({
                     ...userData,
                     avatarUrl: avatar_url,
@@ -76,12 +80,13 @@ const ShowProfile = () => {
                 <h3 className='sticky top-0  px-2 py-1 rounded-md bg-blue-100 capitalize text-base font-semibold mb-3'>repositories</h3>
                 <ol className="list-decimal bg-blue-300 py-6 px-6 rounded-md w-full">
                     {
+                        // mapping repositories
                         userData.userRepos.map(repo => {
 
                             const { name: repoName, html_url: repoUrl } = repo;
 
                             return <li
-                                key={uuidv4()}
+                                key={uuidv4()}  // creating unique list item ID
                                 className="flex justify-between items-center  bg-white py-4 px-6 mb-6 rounded-md "
                             >
                                 <h4 className="font-semibold text-sm tracking-widest">{repoName}</h4>
