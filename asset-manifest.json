@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/githubapiasyncprofileproject/static/css/main.128b7e3f.chunk.css",
-    "main.js": "/githubapiasyncprofileproject/static/js/main.18ecb3f1.chunk.js",
-    "main.js.map": "/githubapiasyncprofileproject/static/js/main.18ecb3f1.chunk.js.map",
+    "main.js": "/githubapiasyncprofileproject/static/js/main.d1484b23.chunk.js",
+    "main.js.map": "/githubapiasyncprofileproject/static/js/main.d1484b23.chunk.js.map",
     "runtime-main.js": "/githubapiasyncprofileproject/static/js/runtime-main.c9eb103e.js",
     "runtime-main.js.map": "/githubapiasyncprofileproject/static/js/runtime-main.c9eb103e.js.map",
     "static/js/2.0f685e51.chunk.js": "/githubapiasyncprofileproject/static/js/2.0f685e51.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.c9eb103e.js",
     "static/js/2.0f685e51.chunk.js",
     "static/css/main.128b7e3f.chunk.css",
-    "static/js/main.18ecb3f1.chunk.js"
+    "static/js/main.d1484b23.chunk.js"
   ]
 }
