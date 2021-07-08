@@ -5,6 +5,7 @@ import UsernameInput from '../components/UsernameInput';
 import ShowProfile from '../components/ShowProfile';
 
 const App = () => {
+
   return (
 
     <main className="min-h-screen grid place-items-center bg-blue-400">
@@ -20,6 +21,8 @@ const App = () => {
         <Route path="/users/:paramsUsername">
           <ShowProfile />
         </Route>
+
+        <Route component={() => (<div>404 Not found </div>)} />
 
       </Switch>
 
