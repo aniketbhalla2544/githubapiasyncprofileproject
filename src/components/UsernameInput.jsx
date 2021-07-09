@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { FiAlertCircle } from "react-icons/fi";
 
 const headingStyle = {
     fontFamily: "'Work Sans', sans-serif",
@@ -10,13 +11,22 @@ const UsernameInput = () => {
 
     const [name, setName] = useState("");
     const [isAllowed, setIsAllowed] = useState(false);
+    const [errorText, setErrorText] = useState("");
 
     // handling input value change
     const handleInput = e => {
 
         const { value } = e.target;
         setName(value); //updating input value
-        (value !== "") ? setIsAllowed(true) : setIsAllowed(false)
+
+        (value !== "") ? setIsAllowed(true) : setIsAllowed(false);
+    }
+
+    const submitHandler = e => {
+
+        (isAllowed) ? setErrorText("") : setErrorText("Name required");
+
+        setTimeout(() => setErrorText(""), 5000);
     }
 
     return (
@@ -29,10 +39,13 @@ const UsernameInput = () => {
 
             <div className='flex flex-col'>
 
+                {/* error msg */}
+                <div className="text-xs text-red-600 mb-2 flex justify-start gap-x-2 items-center flex-nowrap">{(errorText) ? <FiAlertCircle /> : null} {errorText}</div>
+
                 <input type="text" name="" value={name} onChange={handleInput} className="focus:outline-none focus:ring-4 focus:ring-opacity-50 focus:ring-blue-200 shadow mb-10 py-2 px-3 text-center rounded" placeholder="Enter name here" />
 
                 {/* if any value in input field then show profile or denied */}
-                <Link to={(isAllowed) ? `/users/${name}` : '/'} className={`${(isAllowed) ? '' : 'cursor-not-allowed'} self-center text-sm max-w-xl overflow-hidden whitespace-nowrap text-center md:text-base uppercase focus:outline-none focus:ring-2 focus:ring-white tracking-wider bg-blue-300 hover:bg-blue-400 px-5 py-3 font-bold rounded-md`}>
+                <Link onClick={submitHandler} to={(isAllowed) ? `/users/${name}` : '/'} className={`${(isAllowed) ? '' : 'cursor-not-allowed'} self-center text-sm max-w-xl overflow-hidden whitespace-nowrap text-center md:text-base uppercase focus:outline-none focus:ring-2 focus:ring-white tracking-wider bg-blue-300 hover:bg-blue-400 px-5 py-3 font-bold rounded-md`}>
                     show profile
                 </Link>
 
