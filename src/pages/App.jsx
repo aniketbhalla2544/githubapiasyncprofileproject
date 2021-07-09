@@ -8,7 +8,9 @@ const App = () => {
 
   return (
 
-    <main className="min-h-screen grid place-items-center bg-blue-400">
+    <main className="min-h-screen place-items-center bg-gray-900 w-screen flex justify-center items-center relative">
+
+      <div className="bg-gray-100 bg-gradient-to-br from-gray-100 to-gray-600 w-32 h-32 absolute z-0 inset-7 rounded-full"></div>
 
       <Switch>
 

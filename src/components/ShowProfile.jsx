@@ -2,6 +2,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const cursiveFont = {
+    fontFamily: 'cursive',
+}
 
 const ShowProfile = () => {
 
@@ -58,27 +63,58 @@ const ShowProfile = () => {
 
     return (
 
-        <div className='shadow-xl px-10  pt-8 pb-8 bg-blue-600 rounded'>
+        <div className='relative z-10 shadow-xl px-4  pt-8 pb-8 bg-gray-600 border-gray-400 border-opacity-5 border-t-4 border-l-4  h-1/4 overflow-hidden bg-opacity-40 backdrop-filter backdrop-blur-sm w-11/12 mx-auto rounded-3xl md:px-10 max-w-xl'>
 
             <div className="grid place-items-center mb-6">
-                <img className='rounded-full ring-4 ring-blue-300 w-32 aspect-w-1 aspec-h-1' src={userData.avatarUrl} alt="user profile" />
+                <img rel="noreferrer" className='rounded-md ring-4 ring-gray-400 w-36 aspect-w-1 aspec-h-1' src={userData.avatarUrl} alt="user profile" />
             </div>
 
-            <h1 className='mb-12 font-semibold text-2xl text-center'>Hi {userData.userName} 🎉</h1>
+            <h1 className='mb-14 tracking-widest font-semibold text-gray-300 text-2xl text-center overflow-hidden whitespace-nowrap'>Hello <span>{userData.userName}</span></h1>
 
             {/* max-height box */}
             <div className="max-h-56 mb-14 overflow-y-scroll pr-6">
 
-                <h3 className='sticky top-0  px-2 py-1 rounded-md bg-blue-100 capitalize text-base font-semibold mb-3'>more information</h3>
-                <div className="bg-blue-300 py-6 pl-6 pr-24 mb-10 rounded-md space-y-2">
-                    <p><span className='font-semibold text-base'><i className="mr-3 bi bi-geo-alt"></i>Location:</span> {userData.userLocation}</p>
-                    <p><span className='font-semibold text-base'><i className="mr-3 bi bi-info-circle"></i>Bio:</span> {userData.userBio}</p>
-                    <p><span className='font-semibold text-base'><i className="mr-3 bi bi-book"></i>Total repositories:</span> {userData.userTotalRepos}</p>
-                    <p><span className='font-semibold text-base'><i className="mr-3 bi bi-briefcase"></i>Hireable:</span> {userData.userIsHireable}</p>
-                </div>
+                {/* more informations */}
+                <h3 className='text-gray-300 capitalize tracking-widest text-base mb-3'>more information</h3>
 
-                <h3 className='sticky top-0  px-2 py-1 rounded-md bg-blue-100 capitalize text-base font-semibold mb-3'>repositories</h3>
-                <ol className="list-decimal bg-blue-300 py-6 px-6 rounded-md w-full">
+                <div className="p-4 mb-10  grid grid-cols-2 gap-x-6 gap-y-8 grid-rows-2">
+
+                    <div className=" bg-gray-400 p-4 rounded-lg shadow-xl">
+                        <div className="mb-4 grid place-items-center">
+                            <i className=" text-2xl font-extrabold bi bi-briefcase"></i>
+                        </div>
+                        <p className='text-base flex flex-col justify-center items-center'><span className='font-semibold text-center'>Hireable:</span> {userData.userIsHireable}</p>
+                    </div>
+
+                    <div className="bg-gray-400 p-4 rounded-lg shadow-xl">
+                        <div className="mb-4 grid place-items-center">
+                            <i className="text-2xl font-extrabold bi bi-book"></i>
+                        </div>
+                        <p className='text-base flex flex-col justify-center items-center'><span className='font-semibold'>Repositories:</span> <span>{userData.userTotalRepos}</span></p>
+                    </div>
+
+                    <div className="bg-gray-400 px-4 rounded-lg col-span-2 p-4 shadow-xl">
+                        <div className="mb-4 grid place-items-center">
+                            <i className="text-2xl font-extrabold bi bi-geo-alt"></i>
+                        </div>
+                        <p className='text-xs'><span className='font-semibold'>Location: </span><span>{userData.userLocation}</span></p>
+                    </div>
+
+                    <div className="bg-gray-400 px-4 rounded-lg col-span-2 p-4 shadow-xl">
+
+                        <div className="mb-4 grid place-items-center">
+                            <i className="text-2xl font-extrabold mr-3 bi bi-info-circle"></i>
+                        </div>
+                        <p className='text-xs'><span className='font-semibold '>Bio:</span> {userData.userBio}</p>
+                    </div>
+
+                </div>
+                {/* more information finishes */}
+
+                {/* Repositories */}
+                <h3 className='text-gray-300 capitalize tracking-widest text-base mb-3'>repositories</h3>
+
+                <ol className="py-6 px-6 w-full">
                     {
                         // mapping repositories
                         userData.userRepos.map(repo => {
@@ -87,21 +123,20 @@ const ShowProfile = () => {
 
                             return <li
                                 key={uuidv4()}  // creating unique list item ID
-                                className="flex justify-between items-center  bg-white py-4 px-6 mb-6 rounded-md "
+                                className="flex justify-center items-center bg-gray-100 mb-6 rounded-md py-4 shadow-xs"
                             >
-                                <h4 className="font-semibold text-sm tracking-widest">{repoName}</h4>
-
-                                <a href={repoUrl} className='text-xs bg-blue-600 hover:bg-green-500 text-white ml-24 px-3 py-2 tracking-widest uppercase font-semibold rounded-md' target="_blank" rel="noopener">Show</a>
+                                <a href={repoUrl} target="_blank" rel="noopener" className="capitalize underline overflow-hidden font-semibold text-sm tracking-widest">{repoName}</a>
 
                             </li>
                         })
                     }
                 </ol>
+
             </div>
             {/* scroll finish */}
 
             {/* back button */}
-            <button onClick={() => history.goBack()} className='capitalize text-xs bg-white text-blue-700 hover:bg-blue-300 py-3 px-4 inline-grid  hover:text-black place-items-center rounded-full'><i className="bi bi-caret-left-fill"></i></button>
+            <button onClick={() => history.goBack()} className='bg-white text-blue-700 hover:bg-blue-300 w-12 h-12 flex justify-center items-center hover:text-black rounded-full'><i className="text-xl bi bi-caret-left-fill"></i></button>
         </div>
 
     )
